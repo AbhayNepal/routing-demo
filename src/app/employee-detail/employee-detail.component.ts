@@ -1,5 +1,6 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-detail',
@@ -9,11 +10,30 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './employee-detail.component.css'
 })
 export class EmployeeDetailComponent {
-public employeeId;
-private route:ActivatedRoute;
-constructor(){
-  this.route = inject(ActivatedRoute)
-  this.employeeId = parseInt(this.route.snapshot.params['id']);
-}
-
+  public employeeId;
+  private route:ActivatedRoute;
+  private router:Router;
+  
+  constructor(){
+    this.route = inject(ActivatedRoute)
+    this.router = inject(Router)
+    this.route.paramMap.subscribe((params:ParamMap)=>{
+      let id = params.get('id');
+      this.employeeId = parseInt(id!);
+    });
+  }
+  
+  goPrevious(){
+    let previousId = this.employeeId -1;
+    this.router.navigate(['/employee',previousId])
+  }
+  
+  goNext(){
+    let nextId = this.employeeId + 1;
+    this.router.navigate(['/employee',nextId])
+  }
+  gotoDepartments() {
+    let selectedId = this.employeeId? this.employeeId :null;
+    this.router.navigate(['/employee',{id:selectedId}])
+  }
 }

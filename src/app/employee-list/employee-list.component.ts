@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -19,9 +19,15 @@ export class EmployeeListComponent {
     }
   ]
   private router:Router
-
+  private route:ActivatedRoute;
+  public selectedId;
   constructor(){
-    this.router = new Router()
+    this.router = inject(Router)
+    this.route = inject(ActivatedRoute)
+    this.route.paramMap.subscribe((params:ParamMap)=>{
+      let id = params.get('id');
+      this.selectedId = parseInt(id!);
+    });
   }
   onSelect(employee: { id: any; }){
       this.router.navigate(['/employee',employee.id])
