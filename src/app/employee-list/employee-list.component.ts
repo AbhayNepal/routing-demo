@@ -30,8 +30,11 @@ export class EmployeeListComponent {
     });
   }
   onSelect(employee: { id: any; }){
-      this.router.navigate(['/employee',employee.id])
+      // this.router.navigate(['/employee',employee.id])
+      this.router.navigate([employee.id],{relativeTo:this.route})
   }
-
+  isSelected(employee){
+    return employee.id === this.selectedId;
+  }
  
 }

@@ -7,7 +7,7 @@ import { EmployeeDetailComponent } from './employee-detail/employee-detail.compo
 export const routes: Routes = [
     {
         path:'',
-        redirectTo:'/employee',
+        redirectTo:'/employee-list',
         pathMatch:'full'
     },
     
@@ -17,11 +17,11 @@ export const routes: Routes = [
     },
 
     {
-        path:'employee',
+        path:'employee-list',
         component:EmployeeListComponent
     },
     {
-        path:'employee/:id',
+        path:'employee-list/:id',
         component:EmployeeDetailComponent
     },
     {

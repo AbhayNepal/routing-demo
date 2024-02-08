@@ -25,15 +25,16 @@ export class EmployeeDetailComponent {
   
   goPrevious(){
     let previousId = this.employeeId -1;
-    this.router.navigate(['/employee',previousId])
+    this.router.navigate([previousId],{relativeTo:this.route})
   }
   
   goNext(){
     let nextId = this.employeeId + 1;
-    this.router.navigate(['/employee',nextId])
+    // this.router.navigate(['/employee',nextId])
+    this.router.navigate([nextId],{relativeTo:this.route})
   }
   gotoDepartments() {
     let selectedId = this.employeeId? this.employeeId :null;
-    this.router.navigate(['/employee',{id:selectedId}])
+    this.router.navigate(['../',{id:selectedId,test:'testvalue'}],{relativeTo:this.route})
   }
 }

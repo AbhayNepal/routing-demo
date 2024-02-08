@@ -1,6 +1,6 @@
 <h3>List Of Employees</h3>
 <ul class="items">
-    <li (click)="onSelect(employee)" *ngFor="let employee of employees">
+    <li [class.selected]="isSelected(employee)" (click)="onSelect(employee)" *ngFor="let employee of employees">
        <span class="badge">{{employee.id}}</span> {{employee.name}}
     </li>
 </ul>
